@@ -1,5 +1,9 @@
+
+<1.1>
+- CHANGED FROM ALWAYS CHECK
+- to just check every sec when the player is with in the zone   
 <1.0.1>
-- fixed version check
+- fixed version check  
 <1.0.0>
 - first upload
 - you can set any cords in the config and a radius for each any any ped Hash and it will remove the ped fromt he area

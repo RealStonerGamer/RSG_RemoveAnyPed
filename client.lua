@@ -59,26 +59,34 @@ end
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
-        local allPeds = GetGamePool('CPed')
+        Citizen.Wait(1000) 
+        local playerCoords = GetEntityCoords(PlayerPedId())
         for _, location in pairs(Config.Location) do
-            local pedstoremoveHashes = {}
-            for _, modelName in ipairs(location.Pedstoremove) do
-                table.insert(pedstoremoveHashes, GetHashKey(modelName))
-            end
-
-            for i = 1, #allPeds do
-                local ped = allPeds[i]
-                if IsEntityAPed(ped) and ped ~= PlayerPedId() and not IsPedAPlayer(ped) then
-                    local pedModelHash = GetEntityModel(ped)
-                    local pedCoords = GetEntityCoords(ped)
-                    local dist = GetDistanceBetweenCoords(pedCoords, location.coords.x, location.coords.y,
-                        location.coords.z, true)
-                    if dist < location.radius and table.contains(pedstoremoveHashes, pedModelHash) and not IsPedDeadOrDying(ped, true) then
-                        DeleteEntity(ped)
-                    end
-                end
+            local dist = GetDistanceBetweenCoords(playerCoords, location.coords.x, location.coords.y, location.coords.z, true)
+            if dist < location.radius then
+                CheckAndRemovePeds(location)
+                break 
             end
         end
     end
 end)
+
+function CheckAndRemovePeds(location)
+    local allPeds = GetGamePool('CPed')
+    local pedstoremoveHashes = {}
+    for _, modelName in ipairs(location.Pedstoremove) do
+        table.insert(pedstoremoveHashes, GetHashKey(modelName))
+    end
+
+    for i = 1, #allPeds do
+        local ped = allPeds[i]
+        if IsEntityAPed(ped) and ped ~= PlayerPedId() and not IsPedAPlayer(ped) then
+            local pedModelHash = GetEntityModel(ped)
+            local pedCoords = GetEntityCoords(ped)
+            local dist = GetDistanceBetweenCoords(pedCoords, location.coords.x, location.coords.y, location.coords.z, true)
+            if dist < location.radius and table.contains(pedstoremoveHashes, pedModelHash) and not IsPedDeadOrDying(ped, true) then
+                DeleteEntity(ped)
+            end
+        end
+    end
+end
