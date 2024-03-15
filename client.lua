@@ -44,8 +44,7 @@ Citizen.CreateThread(function()
         Citizen.Wait(1000)
         local playerCoords = GetEntityCoords(PlayerPedId())
         for _, location in pairs(Config.Location) do
-            local dist = GetDistanceBetweenCoords(playerCoords, location.coords.x, location.coords.y, location.coords.z,
-                true)
+            local dist = GetDistanceBetweenCoords(playerCoords, location.coords.x, location.coords.y, location.coords.z, true)
             if dist < location.radius then
                 CheckAndRemovePeds(location)
                 break
