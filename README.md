@@ -21,7 +21,7 @@ To use this script:
 
 ## Debug Mode
 
-If you wish to enable Debug mode, which visualizes the area of effect by displaying the radius, you must have `vorp_utils` installed on your server. `vorp_utils` is required only for Debug mode to function properly. You can find `vorp_utils` here: [vorp_utils GitHub](https://github.com/VORPCORE/vorp_utils).
+Debug mode, which visualizes the area of effect by displaying the radius,.
 
 It's recommended to turn Debug mode off in a live server environment to avoid performance issues or unintended distractions.
 
