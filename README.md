@@ -19,4 +19,9 @@ To use this script:
 - Specify the coordinates `vector3(-295.86, 790.62, 118.46)` and the desired radius in your `Config`.
 - Add the ped hashes to your list for the location.
 
-With Debug mode enabled, an area of effect visualizing the radius will be displayed. It's recommended to turn Debug mode off in a live server environment to avoid performance issues or unintended distractions.
+## Debug Mode
+
+If you wish to enable Debug mode, which visualizes the area of effect by displaying the radius, you must have `vorp_utils` installed on your server. `vorp_utils` is required only for Debug mode to function properly. You can find `vorp_utils` here: [vorp_utils GitHub](https://github.com/VORPCORE/vorp_utils).
+
+It's recommended to turn Debug mode off in a live server environment to avoid performance issues or unintended distractions.
+
