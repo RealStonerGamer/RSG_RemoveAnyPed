@@ -1,41 +1,26 @@
-local VORPutils = {}
-local createdBlips = {}
-
-TriggerEvent("getUtils", function(utils)
-    VORPutils = utils
-end)
+local createdBlips = {} 
 
 Citizen.CreateThread(function()
     if Config.debug then
         RegisterCommand("clearBlips", function()
             RemoveAllCreatedBlips()
         end, false)
-
+        local blipHash = GetHashKey('blip_weapon_throwable') 
         for _, location in pairs(Config.Location) do
-            local blip = VORPutils.Blips:SetBlip("test", 'blip_weapon_throwable', 0.2, location.coords.x,
-                location.coords.y, location.coords.z)
-            table.insert(createdBlips, blip)
-            local radius = VORPutils.Blips:AddRadius(location.radius, location.coords.x, location.coords.y,
-                location.coords.z, -1282792512)
-            table.insert(createdBlips, radius)
+            local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, vector3(location.coords.x, location.coords.y, location.coords.z))
+            SetBlipSprite(blip, blipHash) 
+            local radiusBlip = Citizen.InvokeNative(0x45f13b7e0a15c880, -1282792512, location.coords.x, location.coords.y, location.coords.z, location.radius)
+            
+            table.insert(createdBlips, {mainBlip = blip, radiusBlip = radiusBlip})
         end
     end
 end)
 
 function RemoveAllCreatedBlips()
-    for _, blip in ipairs(createdBlips) do
-        if type(blip) == "number" then
-            RemoveBlip(blip)
-        elseif type(blip) == "table" then
-            if blip.Remove then
-                blip:Remove()
-            elseif blip.rawblip then
-                VORPutils.Blips:RemoveBlip(blip.rawblip)
-            else
-                print("Error: Could not identify blip format for removal.", blip)
-            end
-        else
-            print("Error: Unexpected blip data type for removal.", blip)
+    for _, blipEntry in ipairs(createdBlips) do
+        RemoveBlip(blipEntry.mainBlip)
+        if blipEntry.radiusBlip then 
+            RemoveBlip(blipEntry.radiusBlip)
         end
     end
     createdBlips = {} 

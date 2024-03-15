@@ -1,4 +1,5 @@
-
+<1.2>
+- remove: dependency for VORPutils
 <1.1>
 - CHANGED FROM ALWAYS CHECK
 - to just check every sec when the player is with in the zone   
