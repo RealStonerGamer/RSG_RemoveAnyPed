@@ -57,17 +57,26 @@ end)
 function CheckAndRemovePeds(location)
     local allPeds = GetGamePool('CPed')
     local pedstoremoveHashes = {}
+    local exemptedDeadPedHashes = {}
+
     for _, modelName in ipairs(location.Pedstoremove) do
         table.insert(pedstoremoveHashes, GetHashKey(modelName))
     end
+
+    for _, modelName in ipairs(location.DeadPedExemptions or {}) do
+        table.insert(exemptedDeadPedHashes, GetHashKey(modelName))
+    end
+
     for i = 1, #allPeds do
         local ped = allPeds[i]
         if IsEntityAPed(ped) and ped ~= PlayerPedId() and not IsPedAPlayer(ped) then
             local pedModelHash = GetEntityModel(ped)
             local pedCoords = GetEntityCoords(ped)
-            local dist = GetDistanceBetweenCoords(pedCoords, location.coords.x, location.coords.y, location.coords.z,
-                true)
-            if dist < location.radius and table.contains(pedstoremoveHashes, pedModelHash) and not IsPedDeadOrDying(ped, true) then
+            local dist = GetDistanceBetweenCoords(pedCoords, location.coords.x, location.coords.y, location.coords.z, true)
+            local isDeadOrDying = IsPedDeadOrDying(ped, true)
+            local shouldBeRemovedAnyways = table.contains(exemptedDeadPedHashes, pedModelHash)
+
+            if dist < location.radius and table.contains(pedstoremoveHashes, pedModelHash) and (not isDeadOrDying or shouldBeRemovedAnyways) then
                 DeleteEntity(ped)
             end
         end
