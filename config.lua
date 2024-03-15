@@ -1,11 +1,12 @@
 Config = {}
-Config.debug = false
+Config.debug = false   -- leave false on live servers 
 
 Config.Location = {
-    Blackwater = {
-        Pedstoremove = {"mp_a_c_deer_01","a_c_deer_01","a_c_buck_01","mp_a_c_buck_01","mp_a_c_pronghorn_01","a_c_pronghorn_01","a_c_coyote_01","mp_a_c_coyote_01"},
-        coords = vector3(-825.2, -1306.18, 43.6),
-        radius = 120.0
+    Blackwater = { --location name 
+        Pedstoremove = --list of peds to remove from the efected area 
+        {"mp_a_c_deer_01","a_c_deer_01","a_c_buck_01","mp_a_c_buck_01","mp_a_c_pronghorn_01","a_c_pronghorn_01","a_c_coyote_01","mp_a_c_coyote_01"},
+        coords = vector3(-825.2, -1306.18, 43.6), 
+        radius = 120.0   -- radius around the cords to effect 
     },
     valentine = {
         Pedstoremove = {"mp_a_c_deer_01","a_c_deer_01","a_c_buck_01","mp_a_c_buck_01","mp_a_c_pronghorn_01","a_c_pronghorn_01","a_c_coyote_01","mp_a_c_coyote_01"},
