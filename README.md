@@ -1,4 +1,4 @@
-# Remove All Peds
+# Remove Any Peds
 
 This script allows you to designate coordinates and a radius in the configuration, along with a list of peds to remove from that area. Importantly, it does not remove dead peds, ensuring that animals you've hunted and brought into the area of effect remain unaffected.
 
