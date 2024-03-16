@@ -1,6 +1,7 @@
 # Remove Any Peds
 
 - This script allows you to designate coordinates and a radius in the configuration, along with a list of peds to remove from that area. Importantly, it does not remove dead peds, ensuring that animals you've hunted and brought into the area of effect remain unaffected.
+- add dead ped exemptions via the config to alow these dead peds to be removed 
 
 ## Installation
 
@@ -18,6 +19,7 @@ To use this script:
 
 - Specify the coordinates `vector3(-295.86, 790.62, 118.46)` and the desired radius in your `Config`.
 - Add the ped hashes to your list for the location.
+- add dead ped exemptions via the config 
 
 ## Debug Mode
 
